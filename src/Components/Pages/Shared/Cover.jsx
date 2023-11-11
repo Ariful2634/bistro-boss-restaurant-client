@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Parallax } from 'react-parallax';
+// import { Link } from 'react-router-dom';
 
 
 const Cover = ({img, title}) => {
@@ -21,6 +22,7 @@ const Cover = ({img, title}) => {
                         
                     </div>
                 </div>
+                
             </div>
         </div>
     </Parallax>

@@ -5,6 +5,7 @@ import {
 import Root from "../Layout/Root";
 import Home from "../Pages/Home/Home";
 import Menus from "../Pages/Menus/Menus";
+import Order from "../Pages/Order/Order";
 
   export const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ import Menus from "../Pages/Menus/Menus";
         {
           path:'/menu',
           element:<Menus></Menus>
+        },
+        {
+          path:'/order/:category',
+          element:<Order></Order>
         }
       ]
     },
