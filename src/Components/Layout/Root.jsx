@@ -7,13 +7,13 @@ const Root = () => {
 
     const location = useLocation()
 
-    const headerFooter = location.pathname.includes('/login')
+    const noHeaderFooter = location.pathname.includes('/login') || location.pathname.includes('/register')
 
     return (
         <div className="max-w-6xl mx-auto">
-            { headerFooter || <Navbar></Navbar>}
+            { noHeaderFooter || <Navbar></Navbar>}
             <Outlet></Outlet>
-           { headerFooter || <Footer></Footer>}
+           { noHeaderFooter || <Footer></Footer>}
         </div>
     );
 };

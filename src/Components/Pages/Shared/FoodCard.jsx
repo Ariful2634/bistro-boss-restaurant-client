@@ -1,9 +1,64 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const FoodCard = ({items}) => {
 
-    const {image, price,name,recipe}=items
+  const {user}=useContext(AuthContext)
+  const navigate = useNavigate()
+    const {_id,image, price,name,recipe}=items
+    const location = useLocation()
+    
+
+    const handleAdd = foods=>{
+      if(user && user.email){
+        //sending to thr database
+        const cartItem={
+          menuId:_id,
+          email:user.email,
+          name,
+          price,
+          image
+
+        }
+
+        axios.post('http://localhost:5000/carts',cartItem)
+        .then(res=>{
+          console.log(res.data)
+          if(res.data.insertedId){
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${name} added to your cart`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        })
+
+      }
+      else{
+        Swal.fire({
+          title: "Yor are not logged in",
+          text: "Please Logged in first",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Login!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+           navigate('/login', {state:{from:location}})
+          }
+        });
+      }
+    }
 
     return (
         <div className="card w-96 bg-base-100 shadow-xl text-center">
@@ -13,7 +68,7 @@ const FoodCard = ({items}) => {
           <h2 className="card-title flex justify-center">{name}</h2>
           <p>{recipe}</p>
           <div className="card-actions justify-center">
-            <button className="btn btn-outline border-0 border-b-4 border-orange-400 bg-slate-100 ">Add To Cart</button>
+            <button onClick={()=>handleAdd(items)} className="btn btn-outline border-0 border-b-4 border-orange-400 bg-slate-100 ">Add To Cart</button>
           </div>
         </div>
       </div>
