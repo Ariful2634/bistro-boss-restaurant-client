@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import {  FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 
@@ -94,6 +94,7 @@ const AllUsers = () => {
                                         <FaUsers className="text-white"></FaUsers>
                                     </button>}
                                 </td>
+                               
                                 <td>
                                 <button onClick={()=>handleDelete(user._id)} className="btn btn-ghost btn-lg">
                                         <FaTrashAlt className="text-red-600"></FaTrashAlt>
