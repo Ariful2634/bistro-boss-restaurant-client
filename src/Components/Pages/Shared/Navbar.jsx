@@ -3,10 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FaShoppingCart } from 'react-icons/fa';
 import useCarts from "../../hooks/useCarts";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
+    const [isAdmin]=useAdmin()
     const [cart]=useCarts()
 
 
@@ -21,7 +23,12 @@ const Navbar = () => {
         <li  className="mt-2"><NavLink to='/menu'>Our Menus</NavLink></li>
         <li  className="mt-2"><NavLink to='/order/Salads'>Order Now</NavLink></li>
         <li  className="mt-2"><NavLink to='/contact'>Contact Us</NavLink></li>
-        <li  className="mt-2"><NavLink to='/dashboard'>Dashboard</NavLink></li>
+       {
+        user && isAdmin &&  <li  className="mt-2"><NavLink to='/dashboard/adminHome'>Dashboard</NavLink></li>
+       }
+       {
+        user && !isAdmin &&  <li  className="mt-2"><NavLink to='/dashboard/userHome'>Dashboard</NavLink></li>
+       }
         <li className="mt-1"><Link to='/dashboard/cart'>
         <button className="btn btn-sm">
              <FaShoppingCart></FaShoppingCart>
