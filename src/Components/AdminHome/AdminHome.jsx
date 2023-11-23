@@ -10,7 +10,7 @@ const AdminHome = () => {
     const {user}=useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
 
-    const { data: stats } = useQuery({
+    const { data: stats = {} } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
             const res = await axiosSecure.get('/admin-stats')
