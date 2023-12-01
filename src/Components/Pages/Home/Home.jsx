@@ -4,6 +4,7 @@ import Category from "./Category";
 import Featured from "./Featured";
 import PopularItems from "./PopularItems";
 import Testimonials from "./Testimonials";
+import About from "./About";
 
 const Home = () => {
     return (
@@ -18,6 +19,7 @@ const Home = () => {
            <PopularItems></PopularItems>
            <Featured></Featured>
            <Testimonials></Testimonials>
+           <About></About>
         </div>
     );
 };
